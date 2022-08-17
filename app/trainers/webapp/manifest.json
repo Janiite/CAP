@@ -1,0 +1,153 @@
+{
+    "_version": "1.40.0",
+    "sap.app": {
+        "id": "demo.trainers",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:worklist",
+            "version": "1.6.7",
+            "toolsId": "f4bca81c-7dcd-4590-976e-6c14258ce2a6"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/catalog/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "4.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.102.1",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "demo.trainers.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "viewPath": "demo.trainers.view",
+                "controlId": "app",
+                "controlAggregation": "pages",
+                "bypassed": {
+                    "target": [
+                        "notFound"
+                    ]
+                },
+                "async": true
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "worklist",
+                    "target": "worklist"
+                },
+                {
+                    "pattern": "Trainers/{objectId}",
+                    "name": "object",
+                    "target": "object"
+                },
+                {
+                    "pattern": "NewTraining",
+                    "name": "NewTraining",
+                    "target": "NewTraining"
+                }
+            ],
+            "targets": {
+                "worklist": {
+                    "viewName": "Worklist",
+                    "viewId": "worklist",
+                    "viewLevel": 1,
+                    "title": "{i18n>worklistViewTitle}"
+                },
+                "object": {
+                    "viewName": "Object",
+                    "viewId": "object",
+                    "viewLevel": 2,
+                    "title": "{i18n>objectViewTitle}"
+                },
+                "NewTraining": {
+                    "viewName": "NewTraining",
+                    "viewId": "NewTraining",
+                    "viewLevel": 2,
+                    "title": "{i18n>newTrainingViewTitle}"
+                },
+                "objectNotFound": {
+                    "viewName": "ObjectNotFound",
+                    "viewId": "objectNotFound"
+                },
+                "notFound": {
+                    "viewName": "NotFound",
+                    "viewId": "notFound"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "demo.trainers.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "app"
+        }
+    }
+}

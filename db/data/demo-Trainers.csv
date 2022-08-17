@@ -1,0 +1,4 @@
+trainerID;timeFrom;timeTo;date;location_ID;name;surname;
+1;12:00;13:00;2022.08.03;1;John;Doe;
+2;14:00;15:00;2022.08.04;2;Anna;Test;
+5;17:00;18:00;2022.08.05;2;Janis;Ozolins;

@@ -1,0 +1,52 @@
+<mvc:View xmlns:core="sap.ui.core" controllerName="demo.trainers.controller.Object" height="100%"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page 
+        title=" Trainer info" 
+        class="sapUiContentPadding sapUiResponsivePadding--header sapUiResponsivePadding--subHeader sapUiResponsivePadding--content sapUiResponsivePadding--footer" 
+        showNavButton="true" 
+        navButtonPress=".onNavBack">
+        <headerContent>
+
+        
+
+            <Button icon="sap-icon://action" tooltip="Share" />
+        </headerContent>
+        <subHeader>
+            <OverflowToolbar>
+                <ObjectAttribute title="Trainer" text="{name} {surname}"/>
+                <ObjectAttribute title="Gym" text="{location/name}"/>
+                
+            </OverflowToolbar>
+        </subHeader>
+        <content>
+            <VBox>
+                <Table id="trainingTable" width="auto" items="{ path: '/Trainings'}">
+                    <columns id="columns">
+                        <Column id="trainingName">
+                            <Title text="Training Name" id="nameTitle"/>
+                        </Column>
+                        <Column id="trainingDate">
+                            <Title text="Date" id="dateTitle"/>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem type="Navigation" press=".onPress">
+                            <cells>
+                                <ObjectIdentifier text=" {traininType/name}" />
+                                <ObjectIdentifier text=" {trainingDate}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </content>
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button text="Edit" />
+                <Button text="Delete" />
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>
