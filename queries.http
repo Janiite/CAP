@@ -1,0 +1,33 @@
+
+GET http://localhost:4004/catalog/Trainers
+
+###
+
+GET http://localhost:4004/catalog/Trainings
+
+
+###
+POST http://localhost:4004/catalog/Trainings
+Content-Type: application/json
+
+    {
+      "trainingID": 3,
+      "trainer_ID": 2,
+      "trainingTime": "15:00",
+      "traineeName": "New Trainee",
+      "traineeSurname": "Test"
+    }
+
+###
+
+POST http://localhost:4004/catalog/Trainers
+Content-Type: application/json
+
+    { "ID": 6,
+        "trainerID": 6,
+        "timeFrom": "16:00",
+        "timeTo": "17:00",
+        "location_ID": 4,
+        "name": "Test",
+        "surname": "New"
+    }

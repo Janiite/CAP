@@ -36,7 +36,7 @@
                     <ObjectPageSubSection>
                         <blocks>
                         
-                            <m:Table id="trainingsTable" items="{path : 'Trainings'}">
+                            <m:Table id="trainingsTable" items="{path : '/Trainings'}">
                                 <m:columns>
                                     <m:Column/>
                                 </m:columns>
