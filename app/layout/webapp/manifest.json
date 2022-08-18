@@ -1,7 +1,7 @@
 {
     "_version": "1.40.0",
     "sap.app": {
-        "id": "demo.trainerslayout",
+        "id": "demo.layout",
         "type": "application",
         "i18n": "i18n/i18n.properties",
         "applicationVersion": {
@@ -11,9 +11,9 @@
         "description": "{{appDescription}}",
         "resources": "resources.json",
         "sourceTemplate": {
-            "id": "@sap/generator-fiori:worklist",
-            "version": "1.6.7",
-            "toolsId": "7cce477d-4e6b-47da-85bb-a3053a434487"
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.7.0",
+            "toolsId": "1f602541-63c7-4a1c-a419-80637283487c"
         },
         "dataSources": {
             "mainService": {
@@ -66,7 +66,7 @@
             "i18n": {
                 "type": "sap.ui.model.resource.ResourceModel",
                 "settings": {
-                    "bundleName": "demo.trainerslayout.i18n.i18n"
+                    "bundleName": "demo.layout.i18n.i18n"
                 }
             },
             "": {
@@ -81,62 +81,59 @@
             }
         },
         "resources": {
-            "css": []
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
         },
         "routing": {
             "config": {
                 "routerClass": "sap.m.routing.Router",
                 "viewType": "XML",
-                "viewPath": "demo.trainerslayout.view",
-                "controlId": "app",
+                "async": true,
+                "viewPath": "demo.layout.view",
                 "controlAggregation": "pages",
-                "bypassed": {
-                    "target": [
-                        "notFound"
-                    ]
-                },
-                "async": true
+                "controlId": "app",
+                "clearControlAggregation": false
             },
             "routes": [
+               
                 {
-                    "pattern": "",
-                    "name": "worklist",
-                    "target": "worklist"
-                },
-                {
-                    "pattern": "Trainers/{objectId}",
-                    "name": "object",
-                    "target": "object"
-                }
-            ],
-            "targets": {
-                "worklist": {
-                    "viewName": "Worklist",
-                    "viewId": "worklist",
-                    "viewLevel": 1,
-                    "title": "{i18n>worklistViewTitle}"
-                },
-                "object": {
-                    "viewName": "Object",
-                    "viewId": "object",
-                    "viewLevel": 2,
-                    "title": "{i18n>objectViewTitle}"
-                },
-                "objectNotFound": {
-                    "viewName": "ObjectNotFound",
-                    "viewId": "objectNotFound"
-                },
-                "notFound": {
-                    "viewName": "NotFound",
-                    "viewId": "notFound"
-                }
+                    "pattern": ":layout:",
+                    "name": "master",
+					"target": [
+						"master",
+						"detail"
+					]
+				},
+				{
+					"pattern": "detail/{Trainers}",
+					"name": "detail",
+					"target": [
+						"master",
+						"detail"
+					]
+				}
+			],
+			"targets": {
+				"master": {
+					"name": "Master",
+					"controlAggregation": "beginColumnPages"
+				},
+				"detail": {
+					"name": "Detail",
+					"controlAggregation": "midColumnPages"
+				}
+                
             }
+        
         },
         "rootView": {
-            "viewName": "demo.trainerslayout.view.App",
+            "viewName": "demo.layout.view.App",
             "type": "XML",
             "async": true,
-            "id": "app"
+            "id": ""
         }
     }
 }

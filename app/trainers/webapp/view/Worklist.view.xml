@@ -3,31 +3,22 @@
     xmlns:form="sap.ui.layout.form"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:semantic="sap.f.semantic"
-    xmlns:core="sap.ui.core" 
-    controllerName="demo.trainers.controller.Worklist">
+    xmlns:core="sap.ui.core" controllerName="demo.trainers.controller.Worklist">
 
     <semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false" showNavButton="true">
 
         <semantic:titleHeading>
             <Title text="{i18n>worklistTitle}" level="H2"/>
-            
+
         </semantic:titleHeading>
 
         <semantic:content>
-            <Table 
-                id="trainerTable" 
-                width="auto" 
-                items="{ path: '/Trainers', sorter: { path: 'name', descending: false }}" 
-                noDataText="{worklistView>/tableNoDataText}" 
-                busyIndicatorDelay="{worklistView>/tableBusyDelay}" 
-                growing="true" 
-                growingScrollToLoad="true" 
-                updateFinished=".onUpdateFinished">
+            <Table id="trainerTable" width="auto" items="{ path: '/Trainers', sorter: { path: 'name', descending: false }}" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished">
 
                 <headerToolbar>
                     <OverflowToolbar>
                         <Title id="tableHeader" text="{worklistView>/worklistTableTitle}" level="H3"/>
-                        
+
 
                         <ComboBox id="selectLocation" change=".onSelect" width="auto" placeholder="select gym" items="{
                                     path: '/Gyms',
@@ -37,17 +28,12 @@
                                 <core:Item key="{gymId}" text="{name}" />
 
                             </items>
-                            
+
                         </ComboBox>
                         <ToolbarSpacer/>
-                        	
-                            	<Button
-                                    text="New Trainer"
-                                    width="230px"
-                                    press=".onDefaultDialogPress"
-                                    class="sapUiSmallMarginBottom"
-                                    ariaHasPopup="Dialog" />
-		
+
+                        <Button text="New Trainer" width="230px" press=".onDefaultDialogPress" class="sapUiSmallMarginBottom" ariaHasPopup="Dialog" />
+
                         <content/>
                     </OverflowToolbar>
                 </headerToolbar>
