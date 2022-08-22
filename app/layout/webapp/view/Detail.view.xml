@@ -18,7 +18,7 @@
             <m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
                 <f:Avatar displaySize="L" displayShape="Square" class="sapUiTinyMarginEnd">
                 </f:Avatar>
-                <m:Text text="{name}" />
+                <m:Text text=" Trainer - {name}" />
                 <m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
                     <m:Label text="Name"/>
                 </m:VBox>

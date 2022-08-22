@@ -22,6 +22,7 @@ sap.ui.define(
 
     return Controller.extend("demo.layout.controller.Master", {
       onInit: function () {
+        this.oRouter = this.getOwnerComponent().getRouter();
         this.oView = this.getView();
         this._bDescendingSort = false;
         this.oTrainersTable = this.oView.byId("trainersTable");
@@ -38,17 +39,13 @@ sap.ui.define(
       },
 
       onListItemPress: function (oEvent) {
+        const sTrainerId = oEvent.getSource().getBindingContext("Trainers").getProperty("ID");
+				
+
+			  this.oRouter.navTo("detail", { id: sTrainerId});
+
         var oFCL = this.oView.getParent().getParent();
         oFCL.setLayout(fioriLibrary.LayoutType.TwoColumnsMidExpanded);
-        const sTrainerId = oEvent
-          .getSource()
-          .getBindingContext("Trainers")
-          .getPath();
-        this.oRouter = this.getOwnerComponent().getRouter();
-
-        this.oRouter.navTo("detail", {
-          id: sTrainerId,
-        });
       },
 
       onSubmitTrainer: function (oEvent) {
