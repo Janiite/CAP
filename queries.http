@@ -31,3 +31,9 @@ Content-Type: application/json
         "name": "Test",
         "surname": "New"
     }
+###
+
+DELETE http://localhost:4004/catalog/Trainers(15)
+
+
+

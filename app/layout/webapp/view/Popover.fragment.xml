@@ -1,0 +1,30 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Popover id="myPopover" title="{name}" class=" sapUiResponsiveMargi" placement="HorizontalPreferredLeft" initialFocus="submit">
+        <List headerText="Create new trainer">
+            <InputListItem label="Name">
+                <Input id="name" placeholder="Name" value="{name}" />
+            </InputListItem>
+            <InputListItem label="Surname">
+                <Input id="surname" placeholder="Surname" value="{surname}" />
+            </InputListItem>
+            <InputListItem label="Gym">
+                <Select id ="gym" items="{
+                                path: '/Gyms',
+                                sorter: { path: 'name' }
+                            }">
+                    <core:Item  key="{gymId}" text="{name}" value="{gymId}" />
+                </Select>
+            </InputListItem>
+        </List>
+        	<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button
+					id="submit"
+					text="Create"
+					press=".onSubmitTrainer" />
+			</OverflowToolbar>
+		</footer>
+    </Popover>
+</core:FragmentDefinition>

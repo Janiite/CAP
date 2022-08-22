@@ -18,6 +18,7 @@
             <m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
                 <f:Avatar displaySize="L" displayShape="Square" class="sapUiTinyMarginEnd">
                 </f:Avatar>
+                <m:Text text="{name}" />
                 <m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
                     <m:Label text="Name"/>
                 </m:VBox>
@@ -38,12 +39,20 @@
                         
                             <m:Table id="trainingsTable" items="{path : '/Trainings'}">
                                 <m:columns>
-                                    <m:Column/>
+                                    
+                                     <m:Column >
+                                        <m:Title text="Trainne name"/>
+                                    </m:Column>
+                                     <m:Column >
+                                        <m:Title text="Training type"/>
+                                    </m:Column>
+                                   
                                 </m:columns>
                                 <m:items>
-                                    <m:ColumnListItem type="Navigation">
+                                    <m:ColumnListItem >
                                         <m:cells>
                                             <m:ObjectIdentifier text="{traineeName}"/>
+                                            <m:ObjectIdentifier text="{traininType/name}"/>
                                         </m:cells>
                                     </m:ColumnListItem>
                                 </m:items>

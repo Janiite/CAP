@@ -1,4 +1,5 @@
 <mvc:View controllerName="demo.layout.controller.Master"
+    xmlns:l="sap.ui.layout"
     xmlns="sap.m"
     xmlns:f="sap.f"
     xmlns:mvc="sap.ui.core.mvc"
@@ -17,56 +18,36 @@
             <VBox fitContainer="true">
                 <OverflowToolbar class="sapFDynamicPageAlignContent">
                     <ToolbarSpacer/>
-                         <ComboBox id="selectLocation" change=".onSearch" width="auto" placeholder="select gym" items="{
+                    <ComboBox id="selectLocation" change=".onSearch" width="auto" placeholder="select gym" items="{
                                     path: '/Gyms'
                                 }">
-                            <items>
-                                <core:Item key="{gymId}" text="{name}" />
-                            </items>
-                        </ComboBox>
-                    <OverflowToolbarButton icon="sap-icon://add" text="Add" type="Transparent" press=".onDefaultDialogPress"/>
+                        <items>
+                            <core:Item key="{gymId}" text="{name}" />
+                        </items>
+                    </ComboBox>
+                    <OverflowToolbarButton icon="sap-icon://add" text="Show Popover" press="handlePopoverPress" ariaHasPopup="Dialog"/>
+                    <Button id="deleteUserButton" icon="sap-icon://delete" tooltip="{i18n>deleteButtonText}" press=".onDelete"/>
                 </OverflowToolbar>
-                	 <Table 
-                        id="trainerTable" 
-                        inset="false"
-                        items="{ path: '/Trainers'}" >
-                         <columns id="columns">
-                    <Column id="nameColumn">
-                        <Title text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
-                    </Column>
+                <Table id="trainerTable" inset="false" items="{ path: '/Trainers'}" mode="SingleSelectLeft">
+                    <columns id="columns">
+                        <Column >
+                            <Title text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
+                        </Column>
+                        <Column>
+                            <Title text="{i18n>locationTitle}" id="locationColumnTitle"/>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem type="Navigation" press=".onListItemPress">
+                            <cells>
+                                <ObjectIdentifier text=" {name} {surname}" />
 
-                    <Column id="unitNumberColumn">
-                        <Title text="{i18n>locationTitle}" id="locationColumnTitle"/>
-                    </Column>
-                    <Column id="dateColumn">
-                        <Title text="{i18n>dateTitle}" id="dateColumnTitle"/>
-                    </Column>
-                    <Column id="timeColumn">
-                        <Title text="{i18n>timeTitle}" id="timeColumnTitle"/>
-                    </Column>
-                </columns>
-                <items>
-                    <ColumnListItem type="Navigation" press=".onListItemPress">
-                        <cells>
-                            <ObjectIdentifier text=" {name} {surname}" />
-                            <ObjectIdentifier text="{location/name}"/>
-                            <ObjectIdentifier text="{date}"/>
-                            <ObjectIdentifier text="{timeFrom} - {timeTo}"/>
-                        </cells>
-                    </ColumnListItem>
-                </items>
-
-
-				</Table>
-			
+                                <ObjectIdentifier text="{location/name}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
             </VBox>
-
-
-
         </f:content>
-        
-
-
-
     </f:DynamicPage>
 </mvc:View>

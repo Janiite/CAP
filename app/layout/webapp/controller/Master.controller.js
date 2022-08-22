@@ -4,17 +4,8 @@ sap.ui.define(
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "sap/ui/model/Sorter",
-    "sap/m/MessageBox",
     "sap/f/library",
-    "sap/ui/core/IconPool",
-	"sap/m/Dialog",
-	"sap/m/Button",
-	"sap/m/library",
-	"sap/m/List",
-    "sap/m/Input",
-	"sap/m/StandardListItem",
-	"sap/m/Text"
+    "sap/ui/core/Fragment",
   ],
   /**
    * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -24,17 +15,8 @@ sap.ui.define(
     Controller,
     Filter,
     FilterOperator,
-    Sorter,
-    MessageBox,
     fioriLibrary,
-    IconPool, 
-    Dialog, 
-    Button, 
-    mobileLibrary, 
-    List, 
-    Input, 
-    StandardListItem, 
-    Text
+    Fragment
   ) {
     "use strict";
 
@@ -55,43 +37,81 @@ sap.ui.define(
         oTable.getBinding("items").filter(oFilterLocation);
       },
 
-      onAdd: function () {
-        console.log("Add something");
-      },
-      onListItemPress: function () {
+      onListItemPress: function (oEvent) {
         var oFCL = this.oView.getParent().getParent();
         oFCL.setLayout(fioriLibrary.LayoutType.TwoColumnsMidExpanded);
+        const sTrainerId = oEvent
+          .getSource()
+          .getBindingContext("Trainers")
+          .getPath();
+        this.oRouter = this.getOwnerComponent().getRouter();
+
+        this.oRouter.navTo("detail", {
+          id: sTrainerId,
+        });
       },
 
-      onDefaultDialogPress: function () {
-			if (!this.oDefaultDialog) {
-				this.oDefaultDialog = new Dialog({
-					title: "Create Trainer",
-					content: new Input({
-						placeholder: "Trainer name",
-                        value: "{name}"
-					}),
-					beginButton: new Button({
-						text: "OK",
-						press: function () {
-							this.oDefaultDialog.close();
-						}.bind(this)
-					}),
-					endButton: new Button({
-						text: "Close",
-						press: function () {
-							this.oDefaultDialog.close();
-						}.bind(this)
-					})
-				});
+      onSubmitTrainer: function (oEvent) {
+        //Get values from popup
+        let newName = this.getView().byId("name").getValue();
+        let newSurname = this.getView().byId("surname").getValue();
+        let sNewLocation = parseInt(this.byId("gym").getSelectedKey());
 
-				// to get access to the controller's model
-				this.getView().addDependent(this.oDefaultDialog);
-			}
+        //Create new trainer
+        var oContext = this.getView()
+          .byId("trainerTable")
+          .getBinding("items")
+          .create({
+            name: newName,
+            surname: newSurname,
+            location_ID: sNewLocation,
+          });
 
-			this.oDefaultDialog.open();
-		},
+        // Note: This promise fails only if the transient entity is deleted
+        oContext.created().then(
+          function () {
+            this.byId("myPopover").close();
+          },
+          function (oError) {
+            // handle rejection of entity creation; if oError.canceled === true then the transient entity has been deleted
+          }
+        );
+        // Refresh table
+        var oTable = this.byId("trainerTable");
+        oTable.getBinding("items").refresh();
+      },
+      onDelete: function () {
+        var oTable = this.getView().byId("trainerTable"),
+          oContext = oTable.getSelectedItem().getBindingContext();
 
+        oContext.delete("$auto").then(
+          function () {
+            oTable.removeSelections();
+          },
+          function () {}
+        );
+      },
+
+      handlePopoverPress: function (oEvent) {
+        var oButton = oEvent.getSource(),
+          oView = this.getView();
+
+        // create popover
+        if (!this._pPopover) {
+          this._pPopover = Fragment.load({
+            id: oView.getId(),
+            name: "demo.layout.view.Popover",
+            controller: this,
+          }).then(function (oPopover) {
+            oView.addDependent(oPopover);
+
+            return oPopover;
+          });
+        }
+        this._pPopover.then(function (oPopover) {
+          oPopover.openBy(oButton);
+        });
+      },
     });
   }
 );

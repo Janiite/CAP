@@ -17,8 +17,8 @@ sap.ui.define([
 		_onProductMatched: function (oEvent) {
 			this._product = oEvent.getParameter("arguments").product || this._product || "0";
 			this.getView().bindElement({
-				path: "Trainers" + this._product,
-				model: "products"
+				path: "/Trainers" + this._product,
+				model: "Trainers"
 			});
 		},
 
