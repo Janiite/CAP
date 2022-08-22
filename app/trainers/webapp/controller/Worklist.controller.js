@@ -85,8 +85,9 @@ sap.ui.define([
             this._showObject(oEvent.getSource());
             var oNextUIState = this.getOwnerComponent().getHelper().getNextUIState(1),
 				productPath = oEvent.getSource().getSelectedItem().getBindingContext("Trainers").getPath(),
+               
 				product = productPath.split("/").slice(-1).pop();
-
+                console.log(productPath);
 			this.oRouter.navTo("detail", {layout: oNextUIState.layout, product: product});
         },
         
