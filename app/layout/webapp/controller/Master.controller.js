@@ -39,10 +39,12 @@ sap.ui.define(
       },
 
       onListItemPress: function (oEvent) {
-        const sTrainerId = oEvent.getSource().getBindingContext("Trainers").getProperty("ID");
-				
+        const sTrainerId = oEvent
+          .getSource()
+          .getBindingContext("Trainers")
+          .getProperty("ID");
 
-			  this.oRouter.navTo("detail", { id: sTrainerId});
+        this.oRouter.navTo("detail", { id: sTrainerId });
 
         var oFCL = this.oView.getParent().getParent();
         oFCL.setLayout(fioriLibrary.LayoutType.TwoColumnsMidExpanded);
