@@ -10,14 +10,14 @@ sap.ui.define([
 			this.oRouter = oOwnerComponent.getRouter();
 			this.oModel = oOwnerComponent.getModel();
 
-			this.oRouter.getRoute("master").attachPatternMatched(this._onProductMatched, this);
-			this.oRouter.getRoute("detail").attachPatternMatched(this._onProductMatched, this);
+			this.oRouter.getRoute("master").attachPatternMatched(this._onTrainertMatched, this);
+			this.oRouter.getRoute("detail").attachPatternMatched(this._onTrainerMatched, this);
 		},
 
-		_onProductMatched: function (oEvent) {
-			this._product = oEvent.getParameter("arguments").product || this._product || "0";
+		_onTrainertMatched: function (oEvent) {
+			this._trainer = oEvent.getParameter("arguments").trainer || this._trainer|| "0";
 			this.getView().bindElement({
-				path: "/Trainers" + this._product,
+				path: "/Trainers" + this._trainer,
 				model: "Trainers"
 			});
 		},
