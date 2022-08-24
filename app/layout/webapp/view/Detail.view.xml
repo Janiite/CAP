@@ -14,19 +14,13 @@
             </ObjectPageDynamicHeaderTitle>
         </headerTitle>
 
-        <headerContent>
+        <headerContent id="header">
             <m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
-                <f:Avatar displaySize="L" displayShape="Square" class="sapUiTinyMarginEnd">
-                </f:Avatar>
-                <m:Text text=" Trainer - {name}" />
+               
+                <m:Text text=" {Trainers>/name} {Trainers>/surname}" />
+             
                 <m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
-                    <m:Label text="Name"/>
-                </m:VBox>
-                <m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
-                    <m:Label text="Surname"/>
-                </m:VBox>
-                <m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
-                    <m:Label text="Gym"/>
+                    <m:Label text="Gym {Trainers>location/name}"/>
                 </m:VBox>
             </m:FlexBox>
         </headerContent>

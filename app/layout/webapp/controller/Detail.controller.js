@@ -9,15 +9,16 @@ sap.ui.define([
 
 			this.oRouter = oOwnerComponent.getRouter();
 			this.oModel = oOwnerComponent.getModel();
-
-			this.oRouter.getRoute("master").attachPatternMatched(this._onTrainertMatched, this);
-			this.oRouter.getRoute("detail").attachPatternMatched(this._onTrainerMatched, this);
+		
+			this.oRouter.getRoute("master").attachPatternMatched(this._onProductMatched, this);
+			this.oRouter.getRoute("detail").attachPatternMatched(this._onProductMatched, this);
 		},
 
-		_onTrainertMatched: function (oEvent) {
-			this._trainer = oEvent.getParameter("arguments").trainer || this._trainer|| "0";
+		_onProductMatched: function (oEvent) {
+			
+			this._product = oEvent.getParameter("arguments").objectId || this._product || "0";
 			this.getView().bindElement({
-				path: "/Trainers" + this._trainer,
+				path: "/Trainers" + this._product,
 				model: "Trainers"
 			});
 		},

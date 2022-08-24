@@ -39,15 +39,14 @@ sap.ui.define(
       },
 
       onListItemPress: function (oEvent) {
-         let trainerPath = oEvent.getSource().getBindingContext().getPath(),
-				     sTrainerId = trainerPath.split("/").slice(-1).pop();
+        let trainerPath = oEvent.getSource().getBindingContext().getPath(),
+          sTrainerId = trainerPath.split("/").slice(-1).pop();
 
-			  this.oRouter.navTo("detail", { objectId: sTrainerId});
+        this.oRouter.navTo("detail", { objectId: sTrainerId });
 
         var oFCL = this.oView.getParent().getParent();
         oFCL.setLayout(fioriLibrary.LayoutType.TwoColumnsMidExpanded);
       },
-    
 
       onSubmitTrainer: function (oEvent) {
         //Get values from popup

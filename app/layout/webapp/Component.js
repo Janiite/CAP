@@ -1,9 +1,11 @@
 sap.ui.define([
         "sap/ui/core/UIComponent",
         "sap/ui/Device",
-        "demo/layout/model/models"
+        "demo/layout/model/models",
+        'sap/f/FlexibleColumnLayoutSemanticHelper',
+        'sap/f/library'
     ],
-    function (UIComponent, Device, models) {
+    function (UIComponent, Device, models, FlexibleColumnLayoutSemanticHelper, fioriLibrary ) {
         "use strict";
 
         return UIComponent.extend("demo.layout.Component", {
@@ -21,10 +23,24 @@ sap.ui.define([
                 UIComponent.prototype.init.apply(this, arguments);
 
                 // enable routing
+              
                 this.getRouter().initialize();
-
+               
                 // set the device model
                 this.setModel(models.createDeviceModel(), "device");
+            },
+            _getFcl: function () {
+                return new Promise(function(resolve, reject) {
+                    var oFCL = this.getRootControl().byId('flexibleColumnLayout');
+                    if (!oFCL) {
+                        this.getRootControl().attachAfterInit(function(oEvent) {
+                            resolve(oEvent.getSource().byId('flexibleColumnLayout'));
+                        }, this);
+                        return;
+                    }
+                    resolve(oFCL);
+    
+                }.bind(this));
             }
         });
     }
