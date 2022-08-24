@@ -1,2 +1,4 @@
  ID;trainingTypeId;name;duration;
- 1;1;JOGA;1:00;
+ 1;1;Joga;1:00;
+ 2;2;Pilates;1:00;
+ 3;3;TRX;1:00;

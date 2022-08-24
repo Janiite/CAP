@@ -33,7 +33,7 @@ entity TrainingTypesPerTrainer {
 }
 
 entity Trainings {
-    key ID             : UUID;
+    key ID             : Integer;
         trainingID     : Integer;
         trainer        : Association to Trainers;
         traininType    : Association to TrainingTypes;

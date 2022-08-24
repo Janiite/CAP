@@ -11,8 +11,10 @@
 					<m:Title text="{name} {surname}" wrapping="true" class="sapUiSmallMarginEnd"/>
 				</expandedHeading>
                 <actions>
-                    <m:ToggleButton text="Edit" type="Emphasized"/>
-                    <m:Button text="Delete" type="Transparent"/>
+                    <m:Button text="Add Training" type="Emphasized" press="handlePopoverPress"/>
+                    <m:ToggleButton text="Edit" type="Transparent"/>
+                    
+                    <m:Button text="Delete" type="Transparent" press=".onDelete"/>
                 </actions>
             </ObjectPageDynamicHeaderTitle>
         </headerTitle>
@@ -34,16 +36,14 @@
                     <ObjectPageSubSection>
                         <blocks>
                         
-                            <m:Table id="trainingsTable" items="{path : '/Trainings'}">
+                            <m:Table id="trainingsTable" items="{path : '/Trainings'}" mode="SingleSelectLeft">
                                 <m:columns>
-                                    
                                      <m:Column >
                                         <m:Title text="Trainne name"/>
                                     </m:Column>
                                      <m:Column >
                                         <m:Title text="Training type"/>
                                     </m:Column>
-                                   
                                 </m:columns>
                                 <m:items>
                                     <m:ColumnListItem >
