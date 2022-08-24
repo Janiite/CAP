@@ -7,6 +7,9 @@
     <ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false">
         <headerTitle>
             <ObjectPageDynamicHeaderTitle>
+            	<expandedHeading>
+					<m:Title text="{name} {surname}" wrapping="true" class="sapUiSmallMarginEnd"/>
+				</expandedHeading>
                 <actions>
                     <m:ToggleButton text="Edit" type="Emphasized"/>
                     <m:Button text="Delete" type="Transparent"/>
@@ -17,10 +20,10 @@
         <headerContent id="header">
             <m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
                
-                <m:Text text=" {Trainers>/name} {Trainers>/surname}" />
+                
              
                 <m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
-                    <m:Label text="Gym {Trainers>location/name}"/>
+                    <m:Label text="Gym {location/name}"/>
                 </m:VBox>
             </m:FlexBox>
         </headerContent>

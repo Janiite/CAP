@@ -1,2 +1,9 @@
 ID;trainingID;trainer_ID;traininType_ID;trainingTime;trainingDate;traineeName;traineeSurname;
-1;1;1;1;13:00;2022.08.10;Sportists;Test;
+1;1;1;1;13:00;2022.08.24;Sportists;Test;
+2;2;2;1;14:00;2022.08.24;Sportists1;Test1;
+3;3;3;1;15:00;2022.08.24;Sportists2;Test2;
+4;4;4;1;16:00;2022.08.24;Sportists3;Test3;
+6;6;1;1;17:00;2022.08.24;Sportists4;Test4;
+7;7;2;1;10:00;2022.08.25;Sportists5;Test5;
+8;8;3;1;11:00;2022.08.25;Sportists6;Test6;
+9;9;3;1;12:00;2022.08.25;Sportists7;Test7;

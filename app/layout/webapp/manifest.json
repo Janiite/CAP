@@ -108,7 +108,7 @@
 					]
 				},
 				{
-					"pattern": "detail/{objectId}",
+					"pattern": "Trainers/{objectId}",
 					"name": "detail",
 					"target": [
 						"master",

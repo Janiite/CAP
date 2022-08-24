@@ -27,7 +27,7 @@ sap.ui.define(
         this._bDescendingSort = false;
         this.oTrainersTable = this.oView.byId("trainersTable");
       },
-      onSearch: function (oEvent) {
+      onSearch: function () {
         let sLocation = this.byId("selectLocation").getSelectedKey(),
           oTable = this.byId("trainerTable");
 
@@ -39,9 +39,7 @@ sap.ui.define(
       },
 
       onListItemPress: function (oEvent) {
-        let trainerPath = oEvent.getSource().getBindingContext().getPath(),
-          sTrainerId = trainerPath.split("/").slice(-1).pop();
-
+        let sTrainerId = oEvent.getSource().getBindingContext().getObject('ID');
         this.oRouter.navTo("detail", { objectId: sTrainerId });
 
         var oFCL = this.oView.getParent().getParent();
