@@ -25,7 +25,7 @@
                 
              
                 <m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
-                    <m:Label text="Gym {location/name}"/>
+                    <m:Label id="currentGym" text="Gym {location/name}"/>
                 </m:VBox>
             </m:FlexBox>
         </headerContent>

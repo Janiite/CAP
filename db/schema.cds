@@ -20,7 +20,7 @@ entity Trainers {
 }
 
 entity TrainingTypes {
-    key ID             : UUID;
+    key ID             : Integer;
         trainingTypeId : Integer;
         name           : String(25);
         duration       : Time;

@@ -35,9 +35,9 @@
 			<OverflowToolbar>
 				<ToolbarSpacer/>
 				<Button
-					id=""
+					id="newTraining"
 					text="Create"
-					press=".onSubmitTrainer" />
+					press=".onSubmitTraining" />
 			</OverflowToolbar>
 		</footer>
     </Popover>

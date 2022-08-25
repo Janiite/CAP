@@ -3,7 +3,7 @@ sap.ui.define(
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "sap/ui/core/Fragment"
+    "sap/ui/core/Fragment",
   ],
   function (Controller, Filter, FilterOperator, Fragment) {
     "use strict";
@@ -33,7 +33,6 @@ sap.ui.define(
           ? new Filter("trainer_ID", FilterOperator.EQ, this.sObjectId)
           : null;
         oTrainingsTable.getBinding("items").filter(oFilterTrainerId);
-        
       },
 
       onEditToggleButtonPress: function () {
@@ -53,6 +52,7 @@ sap.ui.define(
           function () {}
         );
       },
+
       handlePopoverPress: function (oEvent) {
         var oButton = oEvent.getSource(),
           oView = this.getView();
@@ -72,6 +72,38 @@ sap.ui.define(
         this._pPopover.then(function (oPopover) {
           oPopover.openBy(oButton);
         });
+      },
+      onSubmitTraining: function (oEvent) {
+        //Get values from popup
+        let newSurname = this.getView().byId("trainingSurname").getValue();
+        let newName = this.getView().byId("trainingSurname").getValue();
+        let sNewType = parseInt(this.byId("type").getSelectedKey());
+        let sNewDate = this.byId("DP1");
+        let sNewTime = this.byId("TP1").getValue();
+
+        //Create new trainer
+        var oContext = this.getView()
+          .byId("trainingsTable")
+          .getBinding("items")
+          .create({
+            trainer_ID: parseInt(this.sObjectId),
+            traininType_ID: sNewType,
+            traineeName: newName,
+            traineeSurname: newSurname,
+          });
+
+        // Note: This promise fails only if the transient entity is deleted
+        oContext.created().then(
+          function () {
+            this.byId("createTrainingPopover").close();
+          },
+          function (oError) {
+            // handle rejection of entity creation; if oError.canceled === true then the transient entity has been deleted
+          }
+        );
+        // Refresh table
+        var oTable = this.byId("trainingsTable");
+        oTable.getBinding("items").refresh();
       },
 
       onExit: function () {
