@@ -53,8 +53,7 @@
                                         <m:cells>
                                             <m:ObjectIdentifier text="{traineeName}"/>
                                             <m:ObjectIdentifier text="{traininType/name}"/>
-                                            <m:ObjectIdentifier text="{path: 'trainingDate', 
-                                                                        formatter: '.formatDateTime'}"/>
+                                            <m:ObjectIdentifier text="{path: 'trainingDate'}"/>
                                         </m:cells>
                                     </m:ColumnListItem>
                                 </m:items>

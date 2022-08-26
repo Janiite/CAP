@@ -42,10 +42,11 @@ sap.ui.define(
 
         oObjectPage.setShowFooter(!bCurrentShowFooterState);
       },
-      formatDateTime: function(dateTime) {
-        var oDateInstance = DateFormat.getDateInstance();
-        return oDateInstance.format(oDateInstance.parse(dateTime));
-      },
+      // formatDateTime: function(dateTime) {
+      //   var oDateInstance = DateFormat.getDateInstance();
+      //   console.log(oDateInstance);
+      //   return oDateInstance.format(oDateInstance.parse(dateTime));
+      // },
       onDelete: function () {
         var oTable = this.getView().byId("trainingsTable"),
           oContext = oTable.getSelectedItem().getBindingContext();
@@ -79,11 +80,12 @@ sap.ui.define(
         });
       },
       onSubmitTraining: function (oEvent) {
+       
         //Get values from popup
         let newSurname = this.getView().byId("trainingSurname").getValue();
         let newName = this.getView().byId("trainingSurname").getValue();
         let sNewType = parseInt(this.byId("type").getSelectedKey());
-        let sNewDate = this.byId("DP1").getValue();
+        let sNewDate =this.byId("DP1").getValue();
         let sNewTime = this.byId("TP1").getValue();
 
         console.log(sNewDate); 
@@ -95,6 +97,7 @@ sap.ui.define(
           .create({
             trainer_ID: parseInt(this.sObjectId),
             traininType_ID: sNewType,
+            trainingDate : sNewDate,
             traineeName: newName,
             traineeSurname: newSurname,
           });
