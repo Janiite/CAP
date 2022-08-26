@@ -34,7 +34,8 @@
     <InputListItem label="Time">
         <TimePicker
         id="TP1"
-       
+        displayFormat="hh:mm:ss"
+        valueFormat="hh:mm:ss"
         value="{Trainings>/trainingTime}"
         placeholder="Time" />
     </InputListItem>

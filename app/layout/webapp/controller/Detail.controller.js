@@ -88,7 +88,7 @@ sap.ui.define(
         let sNewDate =this.byId("DP1").getValue();
         let sNewTime = this.byId("TP1").getValue();
 
-        console.log(sNewDate); 
+        console.log(sNewTime); 
 
         //Create new trainer
         var oContext = this.getView()
@@ -97,6 +97,7 @@ sap.ui.define(
           .create({
             trainer_ID: parseInt(this.sObjectId),
             traininType_ID: sNewType,
+            trainingTime: sNewTime,
             trainingDate : sNewDate,
             traineeName: newName,
             traineeSurname: newSurname,

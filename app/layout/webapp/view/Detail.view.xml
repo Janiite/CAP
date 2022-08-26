@@ -47,6 +47,9 @@
                                      <m:Column >
                                         <m:Title text="Training date"/>
                                     </m:Column>
+                                     <m:Column >
+                                        <m:Title text="Training Time"/>
+                                    </m:Column>
                                 </m:columns>
                                 <m:items>
                                     <m:ColumnListItem >
@@ -54,6 +57,7 @@
                                             <m:ObjectIdentifier text="{traineeName}"/>
                                             <m:ObjectIdentifier text="{traininType/name}"/>
                                             <m:ObjectIdentifier text="{path: 'trainingDate'}"/>
+                                            <m:ObjectIdentifier text="{path: 'trainingTime'}"/>
                                         </m:cells>
                                     </m:ColumnListItem>
                                 </m:items>
