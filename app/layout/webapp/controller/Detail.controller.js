@@ -3,9 +3,10 @@ sap.ui.define(
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
+    "sap/ui/core/format/DateFormat",
     "sap/ui/core/Fragment",
   ],
-  function (Controller, Filter, FilterOperator, Fragment) {
+  function (Controller, Filter, FilterOperator, DateFormat, Fragment) {
     "use strict";
 
     return Controller.extend("demo.layout.controller.Detail", {
@@ -40,6 +41,10 @@ sap.ui.define(
           bCurrentShowFooterState = oObjectPage.getShowFooter();
 
         oObjectPage.setShowFooter(!bCurrentShowFooterState);
+      },
+      formatDateTime: function(dateTime) {
+        var oDateInstance = DateFormat.getDateInstance();
+        return oDateInstance.format(oDateInstance.parse(dateTime));
       },
       onDelete: function () {
         var oTable = this.getView().byId("trainingsTable"),
@@ -78,8 +83,10 @@ sap.ui.define(
         let newSurname = this.getView().byId("trainingSurname").getValue();
         let newName = this.getView().byId("trainingSurname").getValue();
         let sNewType = parseInt(this.byId("type").getSelectedKey());
-        let sNewDate = this.byId("DP1");
+        let sNewDate = this.byId("DP1").getValue();
         let sNewTime = this.byId("TP1").getValue();
+
+        console.log(sNewDate); 
 
         //Create new trainer
         var oContext = this.getView()
