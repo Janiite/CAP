@@ -26,6 +26,7 @@
                         </items>
                     </ComboBox>
                     <OverflowToolbarButton icon="sap-icon://add" text="Show Popover" press="handlePopoverPress" ariaHasPopup="Dialog"/>
+                    
                     <Button id="deleteUserButton" icon="sap-icon://delete" tooltip="{i18n>deleteButtonText}" press=".onDelete"/>
                 </OverflowToolbar>
                 <Table id="trainerTable" inset="false" items="{ path: '/Trainers'}" mode="SingleSelectLeft">
