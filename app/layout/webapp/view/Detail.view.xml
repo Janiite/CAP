@@ -1,5 +1,8 @@
 <mvc:View xmlns="sap.uxap"
     xmlns:m="sap.m"
+    
+    xmlns:c="sap.ui.core"
+    xmlns:u="sap.ui.unified"
     xmlns:f="sap.f"
     xmlns:form="sap.ui.layout.form"
     xmlns:mvc="sap.ui.core.mvc"
@@ -37,6 +40,16 @@
                         <blocks>
                         
                             <m:Table id="trainingsTable" items="{path : '/Trainings'}" mode="SingleSelectLeft">
+                                  
+                          
+                                <m:OverflowToolbar style="Clear">
+                                    <m:DatePicke
+                                    placeholder="Enter Date"
+                                    change="handleChange"
+                                    class="sapUiSmallMarginBottom"/>
+                                </m:OverflowToolbar>
+                            
+                                    
                                 <m:columns>
                                      <m:Column >
                                         <m:Title text="Trainne name"/>
