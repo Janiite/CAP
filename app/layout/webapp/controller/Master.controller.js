@@ -39,7 +39,7 @@ sap.ui.define(
       },
 
       onListItemPress: function (oEvent) {
-        let sTrainerId = oEvent.getSource().getBindingContext().getObject('ID');
+        let sTrainerId = oEvent.getSource().getBindingContext().getObject('trainerID');
         this.oRouter.navTo("detail", { objectId: sTrainerId });
 
         var oFCL = this.oView.getParent().getParent();
