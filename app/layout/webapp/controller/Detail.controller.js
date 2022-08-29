@@ -31,10 +31,21 @@ sap.ui.define(
         //Filter table by selected trainer id
         let oTrainingsTable = this.getView().byId("trainingsTable");
         let oFilterTrainerId = this.sObjectId
-          ? new Filter("trainer_ID", FilterOperator.EQ, this.sObjectId)
+          ? new Filter("trainer_trainerID", FilterOperator.EQ, this.sObjectId)
           : null;
         oTrainingsTable.getBinding("items").filter(oFilterTrainerId);
+        
+
+        
+        let date = new Date();
+        const day = date.toLocaleString('default', { day: '2-digit' });
+        const month = date.toLocaleString('default', { month: '2-digit' });
+        const year = date.toLocaleString('default', { year: 'numeric' });
+        let today= year + '-' + month + '-' + day; 
+
+        console.log(today);
       },
+      
 
       onEditToggleButtonPress: function () {
         var oObjectPage = this.getView().byId("ObjectPageLayout"),
@@ -83,7 +94,7 @@ sap.ui.define(
        
         //Get values from popup
         let newSurname = this.getView().byId("trainingSurname").getValue();
-        let newName = this.getView().byId("trainingSurname").getValue();
+        let newName = this.getView().byId("trainingName").getValue();
         let sNewType = parseInt(this.byId("type").getSelectedKey());
         let sNewDate =this.byId("DP1").getValue();
         let sNewTime = this.byId("TP1").getValue();
@@ -95,8 +106,8 @@ sap.ui.define(
           .byId("trainingsTable")
           .getBinding("items")
           .create({
-            trainer_ID: parseInt(this.sObjectId),
-            traininType_ID: sNewType,
+            trainer_trainerID: parseInt(this.sObjectId),
+            traininType_trainingTypeId: sNewType,
             trainingTime: sNewTime,
             trainingDate : sNewDate,
             traineeName: newName,
@@ -115,7 +126,10 @@ sap.ui.define(
         // Refresh table
         var oTable = this.byId("trainingsTable");
         oTable.getBinding("items").refresh();
+       
       },
+    
+ 
 
       onExit: function () {
         this.oRouter
