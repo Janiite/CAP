@@ -1,16 +1,14 @@
 namespace demo;
 
 entity Gyms {
-    key ID        : Integer;
-        gymId     : Integer;
+    key gymId     : Integer;
         name      : String(25);
         streetNum : Integer;
         floor     : String;
 }
 
 entity Trainers {
-    key ID        : Integer;
-        trainerID : Integer;
+    key trainerID : Integer;
         timeFrom  : Time;
         timeTo    : Time;
         date      : Date;
@@ -20,8 +18,7 @@ entity Trainers {
 }
 
 entity TrainingTypes {
-    key ID             : Integer;
-        trainingTypeId : Integer;
+    key trainingTypeId : Integer;
         name           : String(25);
         duration       : Time;
 }
@@ -33,8 +30,7 @@ entity TrainingTypesPerTrainer {
 }
 
 entity Trainings {
-    key ID             : Integer;
-        trainingID     : Integer;
+    key trainingID     : Integer;
         trainer        : Association to Trainers;
         traininType    : Association to TrainingTypes;
         trainingTime   : Time;
