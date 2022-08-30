@@ -1,88 +1,113 @@
-<mvc:View xmlns="sap.uxap"
-    xmlns:m="sap.m"
-    
-    xmlns:c="sap.ui.core"
-    xmlns:u="sap.ui.unified"
-    xmlns:f="sap.f"
-    xmlns:form="sap.ui.layout.form"
-    xmlns:mvc="sap.ui.core.mvc"
-    controllerName="demo.layout.controller.Detail">
-    <ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false">
-        <headerTitle>
-            <ObjectPageDynamicHeaderTitle>
-            	<expandedHeading>
-					<m:Title text="{name} {surname}" wrapping="true" class="sapUiSmallMarginEnd"/>
+<mvc:View
+	xmlns="sap.uxap"
+	xmlns:m="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	controllerName="demo.layout.controller.Detail"
+>
+	<ObjectPageLayout
+		id="ObjectPageLayout"
+		showTitleInHeaderContent="true"
+		isChildPage="true"
+		upperCaseAnchorBar="false"
+	>
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle>
+				<expandedHeading>
+					<m:Title
+						text="{name} {surname}"
+						wrapping="true"
+						class="sapUiSmallMarginEnd"
+					/>
 				</expandedHeading>
-                <actions>
-                    <m:Button text="Add Training" type="Emphasized" press="handlePopoverPress"/>
-                    <m:ToggleButton text="Edit" type="Transparent"/>
-                    
-                    <m:Button text="Delete" type="Transparent" press=".onDelete"/>
-                </actions>
-            </ObjectPageDynamicHeaderTitle>
-        </headerTitle>
-
-        <headerContent id="header">
-            <m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
-               
-                
-             
-                <m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
-                    <m:Label id="currentGym" text="Gym {location/name}"/>
-                </m:VBox>
-            </m:FlexBox>
-        </headerContent>
-
-        <sections>
-            <ObjectPageSection title="Trainings">
-                <subSections>
-                    <ObjectPageSubSection>
-                        <blocks>
-                        
-                            <m:Table id="trainingsTable" items="{path : '/Trainings'}" mode="SingleSelectLeft">
-                                  
-                          
-                                <m:OverflowToolbar style="Clear">
-                                    <m:DatePicke
-                                    placeholder="Enter Date"
-                                    change="handleChange"
-                                    class="sapUiSmallMarginBottom"/>
-                                </m:OverflowToolbar>
-                            
-                                    
-                                <m:columns>
-                                     <m:Column >
-                                        <m:Title text="Trainne name"/>
-                                    </m:Column>
-                                     <m:Column >
-                                        <m:Title text="Training type"/>
-                                    </m:Column>
-                                     <m:Column >
-                                        <m:Title text="Training date"/>
-                                    </m:Column>
-                                     <m:Column >
-                                        <m:Title text="Training Time"/>
-                                    </m:Column>
-                                </m:columns>
-                                <m:items>
-                                    <m:ColumnListItem >
-                                        <m:cells>
-                                            <m:ObjectIdentifier text="{traineeName}"/>
-                                            <m:ObjectIdentifier text="{traininType/name}"/>
-                                            <m:ObjectIdentifier text="{path: 'trainingDate'}"/>
-                                            <m:ObjectIdentifier text="{path: 'trainingTime'}"/>
-                                        </m:cells>
-                                    </m:ColumnListItem>
-                                </m:items>
-                            </m:Table>
-                        </blocks>
-
-
-                    </ObjectPageSubSection>
-                </subSections>
-            </ObjectPageSection>
-
-
-        </sections>
-    </ObjectPageLayout>
+				<actions>
+					<m:Button
+						text="Add Training"
+						type="Emphasized"
+						press="handlePopoverPress"
+					/>
+					<m:Button
+						text="Delete"
+						type="Transparent"
+						press=".onDelete"
+					/>
+				</actions>
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+		<headerContent id="header">
+			<m:FlexBox
+				wrap="Wrap"
+				fitContainer="true"
+			>
+				<m:VBox
+					justifyContent="Center"
+					class="sapUiSmallMarginEnd"
+				>
+					<m:Label
+						id="currentGym"
+						text="Gym {location/name}"
+					/>
+				</m:VBox>
+			</m:FlexBox>
+		</headerContent>
+		<sections>
+			<ObjectPageSection title="Trainings">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<m:Table
+								id="trainingsTable"
+								items="{
+									path: '/Trainings'
+								}"
+								mode="SingleSelectLeft"
+							>
+								<m:columns>
+									<m:Column>
+										<m:Title text="Trainne name"/>
+									</m:Column>
+									<m:Column>
+										<m:Title text="Training type"/>
+									</m:Column>
+									<m:Column>
+										<m:Title text="Training date"/>
+									</m:Column>
+									<m:Column>
+										<m:Title text="Training Time"/>
+									</m:Column>
+								</m:columns>
+								<m:items>
+									<m:ColumnListItem>
+										<m:cells>
+											<m:ObjectIdentifier text="{traineeName}"/>
+											<m:ObjectIdentifier text="{traininType/name}"/>
+											<m:ObjectIdentifier text="{
+												path: 'trainingDate'
+											}"/>
+											<m:ObjectIdentifier text="{
+												path: 'trainingTime'
+											}"/>
+										</m:cells>
+									</m:ColumnListItem>
+								</m:items>
+							</m:Table>
+							<m:DatePicker
+								id="Today"
+								placeholder="Enter Date"
+								valueFormat="YYYY-MM-dd"
+								change="handleChange"
+								class="sapUiSmallMarginBottom"
+								value="{
+									path: 'Trainings>/trainingDate',
+									type: 'sap.ui.model.type.Date',
+									formatOptions: {
+										style: 'long',
+										strictParsing: true
+									}"
+							/>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+	</ObjectPageLayout>
 </mvc:View>

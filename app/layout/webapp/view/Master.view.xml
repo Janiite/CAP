@@ -1,5 +1,5 @@
 <mvc:View controllerName="demo.layout.controller.Master"
-    xmlns:l="sap.ui.layout"
+   
     xmlns="sap.m"
     xmlns:f="sap.f"
     xmlns:mvc="sap.ui.core.mvc"
@@ -29,7 +29,7 @@
                     
                     <Button id="deleteUserButton" icon="sap-icon://delete" tooltip="{i18n>deleteButtonText}" press=".onDelete"/>
                 </OverflowToolbar>
-                <Table id="trainerTable" inset="false" items="{ path: '/Trainers'}" mode="SingleSelectLeft">
+                <Table id="trainerTable"  items="{ path: '/Trainers'}" mode="SingleSelectLeft">
                     <columns id="columns">
                         <Column >
                             <Title text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
