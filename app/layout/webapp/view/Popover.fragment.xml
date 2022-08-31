@@ -13,7 +13,7 @@
                                 path: '/Gyms',
                                 sorter: { path: 'name' }
                             }">
-                    <core:Item  key="{gymId}" text="{name}" value="{gymId}" />
+                    <core:Item  key="{gymId}" text="{name}" />
                 </Select>
             </InputListItem>
         </List>

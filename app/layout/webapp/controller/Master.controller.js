@@ -59,7 +59,7 @@ sap.ui.define(
           .create({
             name: newName,
             surname: newSurname,
-            location_ID: sNewLocation,
+            location_gymId: sNewLocation,
           });
 
         // Note: This promise fails only if the transient entity is deleted
