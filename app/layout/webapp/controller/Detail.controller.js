@@ -27,27 +27,37 @@ sap.ui.define(
       _onProductMatched: function (oEvent) {
         this.sObjectId = oEvent.getParameter("arguments").objectId;
         this.getView().bindContext(`/Trainers(${this.sObjectId})`);
-        
-        //Filter table by selected trainer id
+
+        // Values for filtering
         let oTrainingsTable = this.getView().byId("trainingsTable");
-      
+        let date = new Date();
+        const day = date.toLocaleString("default", { day: "2-digit" });
+        const month = date.toLocaleString("default", { month: "2-digit" });
+        const year = date.toLocaleString("default", { year: "numeric" });
+        let today = year + "-" + month + "-" + day;
+
+        // Filter table by today
+        var oFilterDay = today
+          ? new Filter("trainingDate", FilterOperator.EQ, today)
+          : null;
+        oTrainingsTable.getBinding("items").filter(oFilterDay);
+
+        //Filter table by selected trainer id
+
         let oFilterTrainerId = this.sObjectId
           ? new Filter("trainer_trainerID", FilterOperator.EQ, this.sObjectId)
           : null;
-         oTrainingsTable.getBinding("items").filter(oFilterTrainerId);
-        
-        
-        
-       
-      },
-      handleChange: function() {
-        let date = new Date();
-        const day = date.toLocaleString('default', { day: '2-digit' });
-        const month = date.toLocaleString('default', { month: '2-digit' });
-        const year = date.toLocaleString('default', { year: 'numeric' });
-        let today= year + '-' + month + '-' + day; 
 
-        console.log(today);
+          // Apply filters
+        oTrainingsTable
+          .getBinding("items")
+          .filter([oFilterTrainerId, oFilterDay]);
+      },
+
+     
+
+      handleChange: function() {
+        
         let oTrainingsTable = this.getView().byId("trainingsTable");
         let sDay = this.byId("Today").getValue();
         var oFilterDay = sDay
@@ -55,9 +65,7 @@ sap.ui.define(
           : null;
         oTrainingsTable.getBinding("items").filter(oFilterDay);
       },
-      
 
-   
       // formatDateTime: function(dateTime) {
       //   var oDateInstance = DateFormat.getDateInstance();
       //   console.log(oDateInstance);
@@ -96,15 +104,14 @@ sap.ui.define(
         });
       },
       onSubmitTraining: function (oEvent) {
-       
         //Get values from popup
         let newSurname = this.getView().byId("trainingSurname").getValue();
         let newName = this.getView().byId("trainingName").getValue();
         let sNewType = parseInt(this.byId("type").getSelectedKey());
-        let sNewDate =this.byId("DP1").getValue();
+        let sNewDate = this.byId("DP1").getValue();
         let sNewTime = this.byId("TP1").getValue();
 
-        console.log(sNewTime); 
+        console.log(sNewTime);
 
         //Create new trainer
         var oContext = this.getView()
@@ -114,7 +121,7 @@ sap.ui.define(
             trainer_trainerID: parseInt(this.sObjectId),
             traininType_trainingTypeId: sNewType,
             trainingTime: sNewTime,
-            trainingDate : sNewDate,
+            trainingDate: sNewDate,
             traineeName: newName,
             traineeSurname: newSurname,
           });
@@ -131,10 +138,7 @@ sap.ui.define(
         // Refresh table
         var oTable = this.byId("trainingsTable");
         oTable.getBinding("items").refresh();
-       
       },
-    
- 
 
       onExit: function () {
         this.oRouter
