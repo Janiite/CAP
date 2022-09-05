@@ -5,9 +5,24 @@ sap.ui.define(
     "sap/ui/model/FilterOperator",
     "sap/ui/core/format/DateFormat",
     "sap/ui/core/Fragment",
+    "sap/m/MessageToast",
   ],
-  function (Controller, Filter, FilterOperator, DateFormat, Fragment) {
+  function (
+    Controller,
+    Filter,
+    FilterOperator,
+    DateFormat,
+    Fragment,
+    MessageToast
+  ) {
     "use strict";
+
+    // Set today
+    let date = new Date();
+    const day = date.toLocaleString("default", { day: "2-digit" });
+    const month = date.toLocaleString("default", { month: "2-digit" });
+    const year = date.toLocaleString("default", { year: "numeric" });
+    let today = year + "-" + month + "-" + day;
 
     return Controller.extend("demo.layout.controller.Detail", {
       onInit: function () {
@@ -30,11 +45,6 @@ sap.ui.define(
 
         // Values for filtering
         let oTrainingsTable = this.getView().byId("trainingsTable");
-        let date = new Date();
-        const day = date.toLocaleString("default", { day: "2-digit" });
-        const month = date.toLocaleString("default", { month: "2-digit" });
-        const year = date.toLocaleString("default", { year: "numeric" });
-        let today = year + "-" + month + "-" + day;
 
         // Filter table by today
         var oFilterDay = today
@@ -48,29 +58,31 @@ sap.ui.define(
           ? new Filter("trainer_trainerID", FilterOperator.EQ, this.sObjectId)
           : null;
 
-          // Apply filters
+        // Apply filters
         oTrainingsTable
           .getBinding("items")
           .filter([oFilterTrainerId, oFilterDay]);
       },
+      openDatePicker: function (oEvent) {
+        this.getView().byId("Today").openBy(oEvent.getSource().getDomRef());
+      },
 
-     
+      handleChange: function () {
+        let oFilterTrainerId = this.sObjectId
+          ? new Filter("trainer_trainerID", FilterOperator.EQ, this.sObjectId)
+          : null;
 
-      handleChange: function() {
-        
         let oTrainingsTable = this.getView().byId("trainingsTable");
         let sDay = this.byId("Today").getValue();
         var oFilterDay = sDay
           ? new Filter("trainingDate", FilterOperator.EQ, sDay)
           : null;
-        oTrainingsTable.getBinding("items").filter(oFilterDay);
+        oTrainingsTable
+          .getBinding("items")
+          .filter([oFilterTrainerId, oFilterDay]);
+        this.getView().byId("Today").setValue(null);
       },
 
-      // formatDateTime: function(dateTime) {
-      //   var oDateInstance = DateFormat.getDateInstance();
-      //   console.log(oDateInstance);
-      //   return oDateInstance.format(oDateInstance.parse(dateTime));
-      // },
       onDelete: function () {
         var oTable = this.getView().byId("trainingsTable"),
           oContext = oTable.getSelectedItem().getBindingContext();
@@ -114,30 +126,35 @@ sap.ui.define(
         console.log(sNewTime);
 
         //Create new trainer
-        var oContext = this.getView()
-          .byId("trainingsTable")
-          .getBinding("items")
-          .create({
-            trainer_trainerID: parseInt(this.sObjectId),
-            traininType_trainingTypeId: sNewType,
-            trainingTime: sNewTime,
-            trainingDate: sNewDate,
-            traineeName: newName,
-            traineeSurname: newSurname,
-          });
+        if (sNewDate >= today) {
+          var oContext = this.getView()
+            .byId("trainingsTable")
+            .getBinding("items")
+            .create({
+              trainer_trainerID: parseInt(this.sObjectId),
+              traininType_trainingTypeId: sNewType,
+              trainingTime: sNewTime,
+              trainingDate: sNewDate,
+              traineeName: newName,
+              traineeSurname: newSurname,
+            });
 
-        // Note: This promise fails only if the transient entity is deleted
-        oContext.created().then(
-          function () {
-            this.byId("createTrainingPopover").close();
-          },
-          function (oError) {
-            // handle rejection of entity creation; if oError.canceled === true then the transient entity has been deleted
-          }
-        );
-        // Refresh table
-        var oTable = this.byId("trainingsTable");
-        oTable.getBinding("items").refresh();
+          this.byId("createTrainingPopover").close();
+          this.getView().byId("trainingSurname").setValue("");
+          this.getView().byId("trainingName").setValue("");
+          this.byId("DP1").setValue("");
+          this.byId("TP1").setValue("");
+
+          // Refresh table
+          var oTable = this.byId("trainingsTable");
+          oTable.getBinding("items").refresh();
+        } else {
+          this.getView()
+            .byId("DP1")
+            .setValueState(sap.ui.core.ValueState.Error);
+          var msg = "Please select today or date in future ";
+          MessageToast.show(msg);
+        }
       },
 
       onExit: function () {
