@@ -26,6 +26,11 @@
 						press="handlePopoverPress"
 					/>
 					<m:Button
+						icon="sap-icon://edit"
+						type="Transparent"
+						press="handlePopoverPress"
+					/>
+					<m:Button
 					ariaHasPopup="Dialog"
 					type="Transparent"
 					tooltip="Open Date Picker"
