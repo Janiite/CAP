@@ -32,10 +32,12 @@ sap.ui.define(
           oTable = this.byId("trainerTable");
 
         let oFilterLocation = sLocation
-          ? new Filter("location_ID", FilterOperator.EQ, sLocation)
+          ? new Filter("location_gymId", FilterOperator.EQ, sLocation)
           : null;
 
         oTable.getBinding("items").filter(oFilterLocation);
+       
+        
       },
 
       onListItemPress: function (oEvent) {
@@ -62,20 +64,15 @@ sap.ui.define(
             location_gymId: sNewLocation,
           });
 
-        // Note: This promise fails only if the transient entity is deleted
-        oContext.created().then(
-          function () {
-            this.byId("myPopover").close();
-          },
-          function (oError) {
-            // handle rejection of entity creation; if oError.canceled === true then the transient entity has been deleted
-          }
-        );
+         
+        this.byId("myPopover").close();
         // Refresh table
+        
         var oTable = this.byId("trainerTable");
         oTable.getBinding("items").refresh();
       },
       onDelete: function () {
+      
         var oTable = this.getView().byId("trainerTable"),
           oContext = oTable.getSelectedItem().getBindingContext();
 
