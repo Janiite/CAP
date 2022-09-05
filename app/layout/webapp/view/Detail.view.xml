@@ -21,12 +21,34 @@
 				</expandedHeading>
 				<actions>
 					<m:Button
-						text="Add Training"
-						type="Emphasized"
+						icon="sap-icon://add"
+						type="Transparent"
 						press="handlePopoverPress"
 					/>
 					<m:Button
-						text="Delete"
+					ariaHasPopup="Dialog"
+					type="Transparent"
+					tooltip="Open Date Picker"
+					icon="sap-icon://appointment-2"
+					press=".openDatePicker" />
+				
+					<m:DatePicker
+								id="Today"
+								hideInput="true"
+								placeholder="Date"
+								valueFormat="YYYY-MM-dd"
+								change="handleChange"
+								class="sapUiSmallMarginBottom"
+								value="{
+									path: 'Trainings>/trainingDate',
+									type: 'sap.ui.model.type.Date',
+									formatOptions: {
+										style: 'long',
+										strictParsing: true
+									}"
+													/>
+					<m:Button
+						icon="sap-icon://delete"
 						type="Transparent"
 						press=".onDelete"
 					/>
@@ -47,21 +69,7 @@
 						id="currentGym"
 						text="Gym {location/name}"
 					/>
-				
-					<m:DatePicker
-								id="Today"
-								placeholder="Date"
-								valueFormat="YYYY-MM-dd"
-								change="handleChange"
-								class="sapUiSmallMarginBottom"
-								value="{
-									path: 'Trainings>/trainingDate',
-									type: 'sap.ui.model.type.Date',
-									formatOptions: {
-										style: 'long',
-										strictParsing: true
-									}"
-													/>
+					
 				</m:VBox>
 			</m:FlexBox>
 		</headerContent>
