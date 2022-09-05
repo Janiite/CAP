@@ -18,6 +18,8 @@
             <VBox fitContainer="true">
                 <OverflowToolbar class="sapFDynamicPageAlignContent">
                     <ToolbarSpacer/>
+                    
+                    
                     <ComboBox id="selectLocation" change=".onSearch" width="auto" placeholder="select gym" items="{
                                     path: '/Gyms'
                                 }">
