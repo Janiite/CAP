@@ -8,8 +8,8 @@
 		placement="HorizontalPreferredLeft"
 		initialFocus="submit"
 	>
-		<List headerText="Create new training">
-			<InputListItem label="Training type">
+		<List headerText="{i18n>createHeaderText}">
+			<InputListItem label="{i18n>trainingType}">
 				<Select
 					id="type"
 					items="{
@@ -25,24 +25,24 @@
 					/>
 				</Select>
 			</InputListItem>
-			<InputListItem label="Name">
+			<InputListItem label="{i18n>trainneeName}">
 				<Input
 					id="trainingName"
-					placeholder="Name"
+					placeholder="{i18n>trainneeName}"
 					value="{Trainings>/traineeName}"
 				/>
 			</InputListItem>
-			<InputListItem label="Surname">
+			<InputListItem label="{i18n>trainneeSurname}">
 				<Input
 					id="trainingSurname"
-					placeholder="Surname"
+					placeholder="{i18n>trainneeSurname}"
 					value="{Trainings>/traineeSurname}"
 				/>
 			</InputListItem>
-			<InputListItem label="Date">
+			<InputListItem label="{i18n>date}">
 				<DatePicker
 					id="DP1"
-					placeholder="Enter Date"
+					placeholder="{i18n>date}"
 					class="sapUiSmallMarginBottom"
 					valueFormat="YYYY-MM-dd"
 					valueState=""
@@ -56,12 +56,12 @@
 					}"
 				/>
 			</InputListItem>
-			<InputListItem label="Time">
+			<InputListItem label="{i18n>time}">
 				<TimePicker
 					id="TP1"
 					valueFormat="hh:mm:ss"
 					value="{Trainings>/trainingTime}"
-					placeholder="Time"
+					placeholder="{i18n>time}"
 				/>
 			</InputListItem>
 		</List>
@@ -70,7 +70,7 @@
 				<ToolbarSpacer/>
 				<Button
 					id="newTraining"
-					text="Create"
+					text="{i18n>createButton}"
 					press=".onSubmitTraining"
 				/>
 			</OverflowToolbar>

@@ -1,56 +1,87 @@
-<mvc:View controllerName="demo.layout.controller.Master"
-   
-    xmlns="sap.m"
-    xmlns:f="sap.f"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns:core="sap.ui.core">
-    <f:DynamicPage id="dynamicPageId" toggleHeaderOnTitleClick="false">
-        <!-- DynamicPage Title -->
-        <f:title>
-            <f:DynamicPageTitle>
-                <f:heading>
-                    <Title text="Trainers"/>
-                </f:heading>
-            </f:DynamicPageTitle>
-        </f:title>
-
-        <f:content>
-            <VBox fitContainer="true">
-                <OverflowToolbar class="sapFDynamicPageAlignContent">
-                    <ToolbarSpacer/>
-                    
-                    
-                    <ComboBox id="selectLocation" change=".onSearch" width="auto" placeholder="select gym" items="{
-                                    path: '/Gyms'
-                                }">
-                        <items>
-                            <core:Item key="{gymId}" text="{name}" />
-                        </items>
-                    </ComboBox>
-                    <OverflowToolbarButton icon="sap-icon://add" text="Show Popover" press="handlePopoverPress" ariaHasPopup="Dialog"/>
-                    
-                    <Button id="deleteUserButton" icon="sap-icon://delete" tooltip="{i18n>deleteButtonText}" press=".onDelete"/>
-                </OverflowToolbar>
-                <Table id="trainerTable"  items="{ path: '/Trainers'}" mode="SingleSelectLeft">
-                    <columns id="columns">
-                        <Column >
-                            <Title text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
-                        </Column>
-                        <Column>
-                            <Title text="{i18n>locationTitle}" id="locationColumnTitle"/>
-                        </Column>
-                    </columns>
-                    <items>
-                        <ColumnListItem type="Navigation" press=".onListItemPress">
-                            <cells>
-                                <ObjectIdentifier text=" {name} {surname}" />
-
-                                <ObjectIdentifier text="{location/name}"/>
-                            </cells>
-                        </ColumnListItem>
-                    </items>
-                </Table>
-            </VBox>
-        </f:content>
-    </f:DynamicPage>
+<mvc:View
+	controllerName="demo.layout.controller.Master"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+>
+	<f:DynamicPage
+		id="dynamicPageId"
+		toggleHeaderOnTitleClick="false"
+	>
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="{i18n>pageTitle}"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>
+			<VBox fitContainer="true">
+				<OverflowToolbar class="sapFDynamicPageAlignContent">
+					<ToolbarSpacer/>
+					<ComboBox
+						id="selectLocation"
+						change=".onSearch"
+						width="auto"
+						placeholder="{i18n>selectGym}"
+						items="{
+							path: '/Gyms'
+						}"
+					>
+						<items>
+							<core:Item
+								key="{gymId}"
+								text="{name}"
+							/>
+						</items>
+					</ComboBox>
+					<OverflowToolbarButton
+						icon="sap-icon://add"
+						press="handlePopoverPress"
+						ariaHasPopup="Dialog"
+					/>
+					<Button
+						id="deleteUserButton"
+						icon="sap-icon://delete"
+						press=".onDelete"
+					/>
+				</OverflowToolbar>
+				<Table
+					id="trainerTable"
+					items="{
+						path: '/Trainers'
+					}"
+					mode="SingleSelectLeft"
+				>
+					<columns id="trainerTableColumns">
+						<Column>
+							<Title
+								id="nameColumnTitle"
+								text="{i18n>nameColumn}"
+							/>
+						</Column>
+						<Column>
+							<Title
+								text="{i18n>locationColumn}"
+								id="locationColumnTitle"
+							/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem
+							type="Navigation"
+							press=".onListItemPress"
+						>
+							<cells>
+								<ObjectIdentifier text=" {name} {surname}"/>
+								<ObjectIdentifier text="{location/name}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</VBox>
+		</f:content>
+	</f:DynamicPage>
 </mvc:View>
