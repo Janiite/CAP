@@ -1,0 +1,79 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+	<Popover
+		id="editTrainingPopover"
+		class=" sapUiResponsiveMargi"
+		placement="HorizontalPreferredLeft"
+		initialFocus="submit"
+	>
+		<List headerText="Edit training">
+			<InputListItem label="Training type">
+				<Select
+					id="updateType"
+					items="{
+						path: '/TrainingTypes',
+						sorter: {
+							path: 'name'
+						}
+					}"
+				>
+					<core:Item
+						key="{trainingTypeId}"
+						text="{name}"
+					/>
+				</Select>
+			</InputListItem>
+			<InputListItem label="Name">
+				<Input
+					id="updateTrainingName"
+					placeholder="Name"
+					value="{Trainings>/traineeName}"
+				/>
+			</InputListItem>
+			<InputListItem label="Surname">
+				<Input
+					id="updateTrainingSurname"
+					placeholder="Surname"
+					value="{Trainings>/traineeSurname}"
+				/>
+			</InputListItem>
+			<InputListItem label="Date">
+				<DatePicker
+					id="UDP1"
+					placeholder="Enter Date"
+					class="sapUiSmallMarginBottom"
+					valueFormat="YYYY-MM-dd"
+					valueState=""
+					value="{
+						path: 'Trainings>/trainingDate',
+						type: 'sap.ui.model.type.Date',
+						formatOptions: {
+							style: 'long',
+							strictParsing: true
+						}
+					}"
+				/>
+			</InputListItem>
+			<InputListItem label="Time">
+				<TimePicker
+					id="UTP1"
+					valueFormat="hh:mm:ss"
+					value="{Trainings>/trainingTime}"
+					placeholder="Time"
+				/>
+			</InputListItem>
+		</List>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button
+					id="updateTraining"
+					text="Update"
+					press=".onUpdateTraining"
+				/>
+			</OverflowToolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>
