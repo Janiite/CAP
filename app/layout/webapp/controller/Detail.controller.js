@@ -115,6 +115,30 @@ sap.ui.define(
           oPopover.openBy(oButton);
         });
       },
+      handleEditPress: function (oEvent) {
+        var oTable = this.getView().byId("trainingsTable"),
+        oContext = oTable.getSelectedItem().getBindingContext();
+        console.log(oContext);
+
+        var oButton = oEvent.getSource(),
+          oView = this.getView();
+
+        // create popover
+        if (!this._pPopover) {
+          this._pPopover = Fragment.load({
+            id: oView.getId(),
+            name: "demo.layout.view.EditTraining",
+            controller: this,
+          }).then(function (oPopover) {
+            oView.addDependent(oPopover);
+
+            return oPopover;
+          });
+        }
+        this._pPopover.then(function (oPopover) {
+          oPopover.openBy(oButton);
+        });
+      },
       onSubmitTraining: function (oEvent) {
         //Get values from popup
         let newSurname = this.getView().byId("trainingSurname").getValue();
@@ -155,7 +179,19 @@ sap.ui.define(
           var msg = "Please select today or date in future ";
           MessageToast.show(msg);
         }
+        var oView = this.getView();
+ 
+        function resetBusy() {
+            oView.setBusy(false);
+        }
+
+        // lock UI until submitBatch is resolved, to prevent errors caused by updates while submitBatch is pending
+        oView.setBusy(true);
+         
+        oView.getModel().submitBatch(oView.getModel().getUpdateGroupId()).then(resetBusy, resetBusy);
+
       },
+      
 
       onExit: function () {
         this.oRouter
