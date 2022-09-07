@@ -113,10 +113,37 @@
 												path: 'trainingTime'
 											}"/>
 										</m:cells>
+										
 									</m:ColumnListItem>
 								</m:items>
+								<m:dependents>
+								<m:Dialog
+									id="myDialog"
+									title="{i18n>editHeaderText}"
+									type="Message"
+									
+								>
+									<m:VBox  renderType="Bare">
+										<m:Label text="{i18n>trainneeName}"/>
+										<m:Input value="{traineeName}"/>
+									</m:VBox>
+									<m:beginButton>
+										<m:Button
+											text="Cancel"
+											press=".onCancelPress"
+										/>
+									</m:beginButton>
+									<m:endButton>
+										<m:Button
+											text="OK"
+											press=".onOkPress"
+										/>
+									</m:endButton>
+								</m:Dialog>
+							</m:dependents>
 							</m:Table>
 						</blocks>
+						
 					</ObjectPageSubSection>
 				</subSections>
 			</ObjectPageSection>

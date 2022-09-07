@@ -3,16 +3,16 @@ sap.ui.define(
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "sap/ui/core/format/DateFormat",
     "sap/ui/core/Fragment",
+    "sap/m/MessageBox",
     "sap/m/MessageToast",
   ],
   function (
     Controller,
     Filter,
     FilterOperator,
-    DateFormat,
     Fragment,
+    MessageBox,
     MessageToast
   ) {
     "use strict";
@@ -82,63 +82,6 @@ sap.ui.define(
           .filter([oFilterTrainerId, oFilterDay]);
         this.getView().byId("Today").setValue(null);
       },
-
-      onDelete: function () {
-        var oTable = this.getView().byId("trainingsTable"),
-          oContext = oTable.getSelectedItem().getBindingContext();
-
-        oContext.delete("$auto").then(
-          function () {
-            oTable.removeSelections();
-          },
-          function () {}
-        );
-      },
-
-      handlePopoverPress: function (oEvent) {
-        var oButton = oEvent.getSource(),
-          oView = this.getView();
-
-        // create popover
-        if (!this._pPopover) {
-          this._pPopover = Fragment.load({
-            id: oView.getId(),
-            name: "demo.layout.view.CreateTraining",
-            controller: this,
-          }).then(function (oPopover) {
-            oView.addDependent(oPopover);
-
-            return oPopover;
-          });
-        }
-        this._pPopover.then(function (oPopover) {
-          oPopover.openBy(oButton);
-        });
-      },
-      handleEditPress: function (oEvent) {
-        var oTable = this.getView().byId("trainingsTable"),
-        oContext = oTable.getSelectedItem().getBindingContext();
-        console.log(oContext);
-
-        var oButton = oEvent.getSource(),
-          oView = this.getView();
-
-        // create popover
-        if (!this._pPopover) {
-          this._pPopover = Fragment.load({
-            id: oView.getId(),
-            name: "demo.layout.view.EditTraining",
-            controller: this,
-          }).then(function (oPopover) {
-            oView.addDependent(oPopover);
-
-            return oPopover;
-          });
-        }
-        this._pPopover.then(function (oPopover) {
-          oPopover.openBy(oButton);
-        });
-      },
       onSubmitTraining: function (oEvent) {
         //Get values from popup
         let newSurname = this.getView().byId("trainingSurname").getValue();
@@ -179,19 +122,63 @@ sap.ui.define(
           var msg = "Please select today or date in future ";
           MessageToast.show(msg);
         }
-        var oView = this.getView();
- 
-        function resetBusy() {
-            oView.setBusy(false);
-        }
-
-        // lock UI until submitBatch is resolved, to prevent errors caused by updates while submitBatch is pending
-        oView.setBusy(true);
-         
-        oView.getModel().submitBatch(oView.getModel().getUpdateGroupId()).then(resetBusy, resetBusy);
-
       },
-      
+
+      onDelete: function () {
+        var oTable = this.getView().byId("trainingsTable"),
+          oContext = oTable.getSelectedItem().getBindingContext();
+
+        oContext.delete("$auto").then(
+          function () {
+            oTable.removeSelections();
+          },
+          function () {}
+        );
+      },
+
+      handlePopoverPress: function (oEvent) {
+        var oButton = oEvent.getSource(),
+          oView = this.getView();
+
+        // create popover
+        if (!this._pPopover) {
+          this._pPopover = Fragment.load({
+            id: oView.getId(),
+            name: "demo.layout.view.CreateTraining",
+            controller: this,
+          }).then(function (oPopover) {
+            oView.addDependent(oPopover);
+
+            return oPopover;
+          });
+        }
+        this._pPopover.then(function (oPopover) {
+          oPopover.openBy(oButton);
+        });
+      },
+      handleEditPress: function (oEvent) {
+        var oTable = this.getView().byId("trainingsTable"),
+          oContext = oTable.getSelectedItem();
+        console.log(oContext);
+        if (oContext == null) {
+          var msg = "Please select training ";
+          MessageBox.error(msg);
+        } else {
+          oContext = oContext.getBindingContext();
+          var sPath = oContext.getPath();
+          console.log(sPath);
+          var dialog = this.byId("myDialog");
+          dialog.bindElement({ path: sPath });
+          dialog.open();
+        }
+      },
+      onCancelPress: function () {
+        this.byId("myDialog").close();
+      },
+
+      onOkPress: function () {
+        this.byId("myDialog").close();
+      },
 
       onExit: function () {
         this.oRouter
