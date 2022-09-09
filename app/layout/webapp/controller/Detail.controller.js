@@ -158,27 +158,38 @@ sap.ui.define(
       },
       handleEditPress: function (oEvent) {
         var oTable = this.getView().byId("trainingsTable"),
-          oContext = oTable.getSelectedItem();
+        oContext = oTable.getSelectedItem();
         console.log(oContext);
-        if (oContext == null) {
-          var msg = "Please select training ";
-          MessageBox.error(msg);
-        } else {
-          oContext = oContext.getBindingContext();
+      if (oContext == null) {
+        var msg = "Please select training ";
+        MessageBox.error(msg);
+      } else {
+        oContext = oContext.getBindingContext();
           var sPath = oContext.getPath();
           console.log(sPath);
-          var dialog = this.byId("myDialog");
-          dialog.bindElement({ path: sPath });
-          dialog.open();
-        }
-      },
-      onCancelPress: function () {
-        this.byId("myDialog").close();
-      },
-
-      onOkPress: function () {
-        this.byId("myDialog").close();
-      },
+          
+          // create dialog
+          if (!this.pDialog) {
+            this.pDialog = this.loadFragment({
+              name: "demo.layout.view.EditTraining"
+            });
+          } 
+          this.pDialog.then(function(oDialog) {
+            
+            oDialog.bindElement({ path: sPath });
+            oDialog.open();
+          });
+          
+      
+          
+        }},
+        onCancelPress: function() {
+          this.byId("myDialog").close();
+        },
+    
+        onOkPress: function() {
+          this.byId("myDialog").close();
+        },
 
       onExit: function () {
         this.oRouter
