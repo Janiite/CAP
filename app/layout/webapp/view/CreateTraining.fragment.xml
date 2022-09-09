@@ -1,79 +1,93 @@
 <core:FragmentDefinition
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout"
 >
-	<Popover
-		id="createTrainingPopover"
-		class=" sapUiResponsiveMargi"
-		placement="HorizontalPreferredLeft"
-		initialFocus="submit"
-	>
-		<List headerText="{i18n>createHeaderText}">
-			<InputListItem label="{i18n>trainingType}">
-				<Select
-					id="type"
-					items="{
-						path: '/TrainingTypes',
-						sorter: {
-							path: 'name'
-						}
-					}"
-				>
-					<core:Item
-						key="{trainingTypeId}"
-						text="{name}"
-					/>
-				</Select>
-			</InputListItem>
-			<InputListItem label="{i18n>trainneeName}">
-				<Input
-					id="trainingName"
-					placeholder="{i18n>trainneeName}"
-					value="{Trainings>/traineeName}"
-				/>
-			</InputListItem>
-			<InputListItem label="{i18n>trainneeSurname}">
-				<Input
-					id="trainingSurname"
-					placeholder="{i18n>trainneeSurname}"
-					value="{Trainings>/traineeSurname}"
-				/>
-			</InputListItem>
-			<InputListItem label="{i18n>date}">
-				<DatePicker
-					id="DP1"
-					placeholder="{i18n>date}"
-					class="sapUiSmallMarginBottom"
-					valueFormat="YYYY-MM-dd"
-					valueState=""
-					value="{
-						path: 'Trainings>/trainingDate',
-						type: 'sap.ui.model.type.Date',
-						formatOptions: {
-							style: 'long',
-							strictParsing: true
-						}
-					}"
-				/>
-			</InputListItem>
-			<InputListItem label="{i18n>time}">
-				<TimePicker
-					id="TP1"
-					valueFormat="hh:mm:ss"
-					value="{Trainings>/trainingTime}"
-					placeholder="{i18n>time}"
-				/>
-			</InputListItem>
-		</List>
-		<footer>
-			<OverflowToolbar>
-				<ToolbarSpacer/>
-				<Button
-					id="newTraining"
-					text="{i18n>createButton}"
-					press=".onSubmitTraining"
-				/>
-			</OverflowToolbar>
-		</footer>
-	</Popover>
+<Dialog
+									id="createTraining"
+									title="{i18n>createHeaderText}"
+									type="Message"
+									
+								>
+									<VBox  renderType="Bare">
+										<Label text="{i18n>trainingType}"/>
+											
+												<Select
+													id="type"
+													items="{
+														path: '/TrainingTypes',
+														sorter: {
+															path: 'name'
+														}
+													}"
+												>
+													<core:Item
+														key="{trainingTypeId}"
+														text="{name}"
+													/>
+												</Select> 
+											
+											
+											<Label text="{i18n>trainneeName}" />
+												<Input
+													id="trainingName"
+													placeholder="{i18n>trainneeName}"
+													value="{Trainings>/traineeName}"
+												/>
+											
+											<Label text="{i18n>trainneeSurname}"/>
+												<Input
+													id="trainingSurname"
+													placeholder="{i18n>trainneeSurname}"
+													value="{Trainings>/traineeSurname}"
+												/>
+											
+											<Label text="{i18n>date}"/>
+												
+												<DatePicker
+													id="DP1"
+													placeholder="{i18n>date}"
+													class="sapUiSmallMarginBottom"
+													valueFormat="YYYY-MM-dd"
+													valueState=""
+													value="{
+														path: 'Trainings>/trainingDate',
+														type: 'sap.ui.model.type.Date',
+														formatOptions: {
+															style: 'long',
+															strictParsing: true
+														}
+													}"
+												/>
+												
+										
+											<Label text="{i18n>time}"/>
+											
+												<TimePicker
+													id="TP1"
+													valueFormat="hh:mm:ss"
+													value="{Trainings>/trainingTime}"
+													placeholder="{i18n>time}"
+												/>
+											
+										
+									</VBox>
+									<beginButton>
+										<Button
+												id="newTraining"
+												text="{i18n>createButton}"
+												press=".onSubmitTraining"
+											/>
+										
+									</beginButton>
+									<endButton>
+										<Button
+											text="Cancel"
+											press=".onCloselPress"
+										/>
+									</endButton>
+								</Dialog>
+	
+		
+		
 </core:FragmentDefinition>

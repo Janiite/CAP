@@ -37,6 +37,7 @@ sap.ui.define(
         this.oRouter
           .getRoute("detail")
           .attachPatternMatched(this._onProductMatched, this);
+          
       },
 
       _onProductMatched: function (oEvent) {
@@ -83,7 +84,7 @@ sap.ui.define(
         this.getView().byId("Today").setValue(null);
       },
       onSubmitTraining: function (oEvent) {
-        //Get values from popup
+        //Get values from Dialog
         let newSurname = this.getView().byId("trainingSurname").getValue();
         let newName = this.getView().byId("trainingName").getValue();
         let sNewType = parseInt(this.byId("type").getSelectedKey());
@@ -106,11 +107,8 @@ sap.ui.define(
               traineeSurname: newSurname,
             });
 
-          this.byId("createTrainingPopover").close();
-          this.getView().byId("trainingSurname").setValue("");
-          this.getView().byId("trainingName").setValue("");
-          this.byId("DP1").setValue("");
-          this.byId("TP1").setValue("");
+          this.byId("createTraining").close();
+          this.clearCreateData();
 
           // Refresh table
           var oTable = this.byId("trainingsTable");
@@ -122,6 +120,12 @@ sap.ui.define(
           var msg = "Please select today or date in future ";
           MessageToast.show(msg);
         }
+      },
+      clearCreateData: function () {
+        this.getView().byId("trainingSurname").setValue("");
+        this.getView().byId("trainingName").setValue("");
+        this.byId("DP1").setValue("");
+        this.byId("TP1").setValue("");
       },
 
       onDelete: function () {
@@ -140,56 +144,51 @@ sap.ui.define(
         var oButton = oEvent.getSource(),
           oView = this.getView();
 
-        // create popover
-        if (!this._pPopover) {
-          this._pPopover = Fragment.load({
-            id: oView.getId(),
+        // create dialog
+        if (!this.pDialog) {
+          this.pDialog = this.loadFragment({
             name: "demo.layout.view.CreateTraining",
-            controller: this,
-          }).then(function (oPopover) {
-            oView.addDependent(oPopover);
-
-            return oPopover;
           });
         }
-        this._pPopover.then(function (oPopover) {
-          oPopover.openBy(oButton);
+        this.pDialog.then(function (oDialog) {
+          oDialog.open();
         });
       },
       handleEditPress: function (oEvent) {
         var oTable = this.getView().byId("trainingsTable"),
-        oContext = oTable.getSelectedItem();
+          oContext = oTable.getSelectedItem();
         console.log(oContext);
-      if (oContext == null) {
-        var msg = "Please select training ";
-        MessageBox.error(msg);
-      } else {
-        oContext = oContext.getBindingContext();
+        if (oContext == null) {
+          var msg = "Please select training ";
+          MessageBox.error(msg);
+        } else {
+          oContext = oContext.getBindingContext();
           var sPath = oContext.getPath();
           console.log(sPath);
-          
+
           // create dialog
           if (!this.pDialog) {
             this.pDialog = this.loadFragment({
-              name: "demo.layout.view.EditTraining"
+              name: "demo.layout.view.EditTraining",
             });
-          } 
-          this.pDialog.then(function(oDialog) {
-            
+          }
+          this.pDialog.then(function (oDialog) {
             oDialog.bindElement({ path: sPath });
             oDialog.open();
           });
-          
-      
-          
-        }},
-        onCancelPress: function() {
-          this.byId("myDialog").close();
-        },
-    
-        onOkPress: function() {
-          this.byId("myDialog").close();
-        },
+        }
+      },
+      onCancelPress: function () {
+        this.byId("myDialog").close();
+      },
+      onCloselPress: function () {
+        this.clearCreateData();
+        this.byId("createTraining").close();
+      },
+
+      onOkPress: function () {
+        this.byId("myDialog").close();
+      },
 
       onExit: function () {
         this.oRouter
