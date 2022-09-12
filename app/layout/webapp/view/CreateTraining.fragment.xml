@@ -49,7 +49,7 @@
 													placeholder="{i18n>date}"
 													class="sapUiSmallMarginBottom"
 													valueFormat="YYYY-MM-dd"
-													valueState=""
+													valueState="None"
 													value="{
 														path: 'Trainings>/trainingDate',
 														type: 'sap.ui.model.type.Date',

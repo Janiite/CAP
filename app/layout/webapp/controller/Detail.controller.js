@@ -37,7 +37,6 @@ sap.ui.define(
         this.oRouter
           .getRoute("detail")
           .attachPatternMatched(this._onProductMatched, this);
-          
       },
 
       _onProductMatched: function (oEvent) {
@@ -91,8 +90,6 @@ sap.ui.define(
         let sNewDate = this.byId("DP1").getValue();
         let sNewTime = this.byId("TP1").getValue();
 
-        console.log(sNewTime);
-
         //Create new trainer
         if (sNewDate >= today) {
           var oContext = this.getView()
@@ -125,6 +122,7 @@ sap.ui.define(
         this.getView().byId("trainingSurname").setValue("");
         this.getView().byId("trainingName").setValue("");
         this.byId("DP1").setValue("");
+        this.byId("DP1").setValueState(sap.ui.core.ValueState.None);
         this.byId("TP1").setValue("");
       },
 
@@ -140,7 +138,7 @@ sap.ui.define(
         );
       },
 
-      handlePopoverPress: function (oEvent) {
+      handleAddNewTraining: function (oEvent) {
         var oButton = oEvent.getSource(),
           oView = this.getView();
 
@@ -157,14 +155,12 @@ sap.ui.define(
       handleEditPress: function (oEvent) {
         var oTable = this.getView().byId("trainingsTable"),
           oContext = oTable.getSelectedItem();
-        console.log(oContext);
         if (oContext == null) {
           var msg = "Please select training ";
           MessageBox.error(msg);
         } else {
           oContext = oContext.getBindingContext();
           var sPath = oContext.getPath();
-          console.log(sPath);
 
           // create dialog
           if (!this.pDialog) {

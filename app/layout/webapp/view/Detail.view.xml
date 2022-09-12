@@ -23,7 +23,7 @@
 					<m:Button
 						icon="sap-icon://add"
 						type="Transparent"
-						press="handlePopoverPress"
+						press=".handleAddNewTraining"
 					/>
 					<m:Button
 						icon="sap-icon://edit"
