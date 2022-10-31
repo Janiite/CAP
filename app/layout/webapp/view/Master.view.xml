@@ -4,6 +4,7 @@
 	xmlns:f="sap.f"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"
+	xmlns:form="sap.ui.layout.form"
 >
 	<f:DynamicPage
 		id="dynamicPageId"
@@ -74,6 +75,12 @@
 							type="Navigation"
 							press=".onListItemPress"
 						>
+						
+						
+							<cells>
+								
+							</cells>
+						</ColumnListItem>
 							<cells>
 								<ObjectIdentifier text=" {name} {surname}"/>
 								<ObjectIdentifier text="{location/name}"/>
@@ -81,6 +88,9 @@
 						</ColumnListItem>
 					</items>
 				</Table>
+				
+
+
 			</VBox>
 		</f:content>
 	</f:DynamicPage>

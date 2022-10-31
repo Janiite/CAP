@@ -28,7 +28,7 @@
 					<m:Button
 						icon="sap-icon://edit"
 						type="Transparent"
-						press="handleEditPress"
+						press=".handleEditPress"
 					/>
 					<m:Button
 						ariaHasPopup="Dialog"
