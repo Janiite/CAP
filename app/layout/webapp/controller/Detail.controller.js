@@ -130,9 +130,12 @@ sap.ui.define(
         var oTable = this.getView().byId("trainingsTable"),
           oContext = oTable.getSelectedItem().getBindingContext();
 
-        oContext.delete("$auto").then(function () {
-          oTable.removeSelections();
-        });
+        oContext.delete("$auto").then(
+          function () {
+            oTable.removeSelections();
+          },
+          function () {}
+        );
       },
 
       handleAddNewTraining: function (oEvent) {
@@ -173,10 +176,6 @@ sap.ui.define(
       },
       onCancelPress: function () {
         this.byId("myDialog").close();
-       
-      },
-      afterClose: function(){
-        oDialog.destroy();
       },
       onCloselPress: function () {
         this.clearCreateData();
