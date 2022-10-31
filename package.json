@@ -11,7 +11,7 @@
     "generator-easy-ui5": "^3.5.0"
   },
   "devDependencies": {
-    "@sap/ux-specification": "^1.102.5",
+    "@sap/ux-specification": "^1.102.3",
     "sqlite3": "^5.0.4"
   },
   "scripts": {
@@ -22,8 +22,7 @@
     "watch-flex": "cds watch --open flex/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-fiori-trainers": "cds watch --open fiori-trainers/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-f-trainers": "cds watch --open f-trainers/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-layout": "cds watch --open layout/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-gyml": "cds watch --open gyml/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-layout": "cds watch --open layout/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
@@ -60,8 +59,7 @@
     "app/flex",
     "app/fiori-trainers",
     "app/f-trainers",
-    "app/layout",
-    "app/gyml"
+    "app/layout"
   ],
   "cds": {
     "requires": {
